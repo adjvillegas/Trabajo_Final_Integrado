@@ -4,20 +4,22 @@ const routerProduct = express.Router();
 routerProduct.use(express.json());
 routerProduct.use(express.urlencoded({extended: true}))
 
-const Archivo = require('../controller/archivoClass');
+const Archivo = require('../../controller/archivoClass');
 
 const file = new Archivo();
 
 routerProduct.get('/listar/:id?', (req, res) => {
 
-
+    console.log('llegue')
     const fileRead = async(id) => {
+        console.log('llegue01')
         const response = await file.readForId('productos', id)
+        console.log('llegue02')
         res.json(response)
     }
  
     fileRead(req.params.id);
-
+    console.log('llegue03')
 });
 
 routerProduct.post('/agregar', (req, res) => {
