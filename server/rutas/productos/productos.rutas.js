@@ -1,8 +1,16 @@
 const express = require('express');
 const routerProduct = express.Router();
 
+// const bodyParser = require('body-parser');
+// const cors = require('cors')
+
+// routerProduct.use(bodyParser.json());
+// routerProduct.use(cors());
+
 routerProduct.use(express.json());
 routerProduct.use(express.urlencoded({extended: true}))
+
+
 
 const Archivo = require('../../controller/archivoClass');
 
@@ -10,17 +18,32 @@ const file = new Archivo();
 
 routerProduct.get('/listar/:id?', (req, res) => {
 
-
-    const fileRead = async(id) => {
+    // console.log('llegue')
+    // const fileRead = async(id) => {
+    //     console.log('llegue01')
+    //     const response = await file.readForId('productos', id)
+    //     console.log('llegue02')
+    //     // res.json(response)
+    //     res.status(200).json(response).end()
+    //     // res.sendStatus("200")
+    //     // res.end()
+    // }
  
-        const response = await file.readForId('productos', id)
-        response.writeHead(200, {'Content-Type': 'application/json;charset=UTF-8', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS', "Access-Control-Allow-Headers": "If-Modified-Since"});    
-        res.write(respose)
-        res.end()
-    }
- 
-    fileRead(req.params.id);
+    // fileRead(req.params.id);
 
+    const articulo = [{
+		"nombre": "Producto 2",
+		"descripcion": "producto de prueba postman 2",
+		"codigo": "AN1TT3S",
+		"foto": "NUEVA URL",
+		"precio": 170,
+		"stock": 101,
+		"id": "16311171505921"
+	}]
+
+    res.send(articulo)
+
+    console.log('llegue03')
 });
 
 routerProduct.post('/agregar', (req, res) => {
