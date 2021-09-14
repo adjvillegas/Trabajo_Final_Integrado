@@ -4,7 +4,7 @@ const routerCarrito = express.Router();
 routerCarrito.use(express.json());
 routerCarrito.use(express.urlencoded({extended: true}))
 
-const Archivo = require('../controller/archivoClass');
+const Archivo = require('../../controller/archivoClass');
 
 const file = new Archivo();
 

@@ -4,7 +4,7 @@ const routerProduct = express.Router();
 routerProduct.use(express.json());
 routerProduct.use(express.urlencoded({extended: true}))
 
-const Archivo = require('../controller/archivoClass');
+const Archivo = require('../../controller/archivoClass');
 
 const file = new Archivo();
 
@@ -12,8 +12,11 @@ routerProduct.get('/listar/:id?', (req, res) => {
 
 
     const fileRead = async(id) => {
+ 
         const response = await file.readForId('productos', id)
-        res.json(response)
+        response.writeHead(200, {'Content-Type': 'application/json;charset=UTF-8', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS', "Access-Control-Allow-Headers": "If-Modified-Since"});    
+        res.write(respose)
+        res.end()
     }
  
     fileRead(req.params.id);

@@ -110,7 +110,7 @@ class Archivo {
 
         const readLocalFile = await fs.promises.readFile(currentUrl);
         const jsonFile = JSON.parse(readLocalFile.toString('utf-8'));
-
+  
         const currentJsonFile = jsonFile.filter(data => data.id !== id)
 
         try {
