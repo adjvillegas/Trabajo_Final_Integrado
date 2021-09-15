@@ -12,10 +12,11 @@ class Archivo {
         const currentUrl = `${this.urlLocal}${archivo}.txt`;
 
         const readLocalFile = await fs.promises.readFile(currentUrl);
+        console.log(id)
         const jsonFile = JSON.parse(readLocalFile.toString('utf-8'));
-
+      
         if (id) {
-
+            console.log("estoy dentro del if")
             return jsonFile.filter(data => data.id === id)
 
         } else return jsonFile

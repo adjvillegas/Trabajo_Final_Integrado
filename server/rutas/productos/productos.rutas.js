@@ -1,16 +1,8 @@
 const express = require('express');
 const routerProduct = express.Router();
 
-// const bodyParser = require('body-parser');
-// const cors = require('cors')
-
-// routerProduct.use(bodyParser.json());
-// routerProduct.use(cors());
-
 routerProduct.use(express.json());
 routerProduct.use(express.urlencoded({extended: true}))
-
-
 
 const Archivo = require('../../controller/archivoClass');
 
@@ -18,32 +10,16 @@ const file = new Archivo();
 
 routerProduct.get('/listar/:id?', (req, res) => {
 
-    // console.log('llegue')
-    // const fileRead = async(id) => {
-    //     console.log('llegue01')
-    //     const response = await file.readForId('productos', id)
-    //     console.log('llegue02')
-    //     // res.json(response)
-    //     res.status(200).json(response).end()
-    //     // res.sendStatus("200")
-    //     // res.end()
-    // }
- 
-    // fileRead(req.params.id);
+    const fileRead = async(id) => {
+        
+        const response = await file.readForId('productos', id)
 
-    const articulo = [{
-		"nombre": "Producto 2",
-		"descripcion": "producto de prueba postman 2",
-		"codigo": "AN1TT3S",
-		"foto": "NUEVA URL",
-		"precio": 170,
-		"stock": 101,
-		"id": "16311171505921"
-	}]
+        res.status(200).send(response).end()
 
-    res.send(articulo)
+    }
 
-    console.log('llegue03')
+    fileRead(req.params.id);
+
 });
 
 routerProduct.post('/agregar', (req, res) => {

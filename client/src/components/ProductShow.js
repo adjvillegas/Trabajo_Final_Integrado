@@ -1,34 +1,37 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useParams } from 'react-router'
-//Components
-import CardCardProps from './CardCardProps'
 
+import { useParams } from 'react-router';
 
 const ProductShow = () => {
 
-    const [products, setProducts] = useState()
+    const [Products, setProducts] = useState([])
 
-    useEffect(async () => {
+    const { Id } = useParams()
 
-        const result = await axios('http://localhost:8080/productos/listar/')
-        setProducts(result.data)
-        debugger
-    }, [])
+    useEffect(() => {
 
+        async function myRequest() {
+            
+            let response
+            debugger
+    
+                response = await axios(`http://localhost:8080/productos/listar/${Id}`)
+
+            setProducts(response.data[0])
+
+        };
+
+        myRequest();
+    }, [Id]);
 
     return (
         <div>
-            {/* {products.map(item => { */}
-                {/* return ( */}
-                    {/* <CardCardProps key={item.id} producto={item}/> */}
-                    <CardCardProps/>
-                {/* ) */}
-            {/* })} */}
-
-        </div>  
-    );
-
+            <h1>{Products.descripcion}</h1>
+            <h2>{Products.precio}</h2>
+            <h3>{Products.stock}</h3>
+        </div>
+    )
 }
 
 export default ProductShow
