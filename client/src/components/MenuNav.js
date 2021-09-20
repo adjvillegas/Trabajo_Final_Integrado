@@ -32,10 +32,16 @@ export default class menuNav extends Component {
           <Dropdown.Menu>
             <Dropdown.Item
                       name='Crear'
+                      active={activeItem === 'Crear'}
+                      onClick={this.handleItemClick}
                       as={Link}
                       to='/productCreate'>Crear Producto</Dropdown.Item>
-            <Dropdown.Item>Actualizar Producto</Dropdown.Item>
-            <Dropdown.Item>Borrar Producto</Dropdown.Item>
+            <Dropdown.Item
+                      name='Mantener'
+                      active={activeItem === 'Mantener'}
+                      onClick={this.handleItemClick}
+                      as={Link}
+                      to='/Maintenance'>Mantenimiento de Producto</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <Menu.Menu position='right'>

@@ -16,5 +16,50 @@
 		"precio": 70,
 		"stock": 81,
 		"id": "16311189636481"
+	},
+	{
+		"nombre": "javier",
+		"descripcion": "Producto que representa a Javier",
+		"codigo": "JJGUITQA",
+		"foto": "ulr.imagenes.com.ar",
+		"precio": "2223",
+		"stock": "90",
+		"id": "16320961639962"
+	},
+	{
+		"nombre": "",
+		"descripcion": "",
+		"codigo": "",
+		"foto": "",
+		"precio": "",
+		"stock": "",
+		"id": "16320963639353"
+	},
+	{
+		"nombre": "",
+		"descripcion": "",
+		"codigo": "",
+		"foto": "",
+		"precio": "",
+		"stock": "",
+		"id": "16320963687104"
+	},
+	{
+		"nombre": "Javier",
+		"descripcion": "",
+		"codigo": "",
+		"foto": "",
+		"precio": "",
+		"stock": "",
+		"id": "16320970189355"
+	},
+	{
+		"nombre": "Javier",
+		"descripcion": "qweqwe",
+		"codigo": "12314",
+		"foto": "sadqqwe",
+		"precio": "122",
+		"stock": "122",
+		"id": "16320970309096"
 	}
 ]
