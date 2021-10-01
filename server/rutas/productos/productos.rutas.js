@@ -1,81 +1,70 @@
 const express = require('express');
-const routerProduct = express.Router();
 
-routerProduct.use(express.json());
-routerProduct.use(express.urlencoded({extended: true}))
+module.exports = ( oClass ) => {
 
-const Archivo = require('../../controller/archivoClass');
+    const routerProduct = express.Router()
 
-const file = new Archivo();
+    routerProduct.use(express.json());
+    routerProduct.use(express.urlencoded({extended: true}))
 
-routerProduct.get('/listar/:id?', (req, res) => {
+    routerProduct.get('/listar/:id?', (req, res) => {
 
-    const fileRead = async(id) => {
+            const fileRead = async(id) => {
+                
+                const response = await oClass.readForId('productos', id)
         
-        const response = await file.readForId('productos', id)
+                res.status(200).send(response).end()
+        
+            }
+        
+            fileRead(req.params.id);
+        
+        
 
-        res.status(200).send(response).end()
+        });
 
-    }
+    routerProduct.post('/agregar', (req, res) => {
 
-    fileRead(req.params.id);
+            const fileSave = async(odata) => {
+        
+                const respose = await oClass.download('productos', odata);
+        
+                res.json(respose)
+        
+            };
+        
+            fileSave({nombre: req.body.nombre,
+                descripcion: req.body.descripcion,
+                codigo: req.body.codigo,
+                foto: req.body.foto,
+                precio: req.body.precio,
+                stock: req.body.stock})
+        
+        });
 
-});
+        routerProduct.put('/actualizar/:id', (req, res) => {
 
-routerProduct.post('/agregar', (req, res) => {
+                const fileUpdate = async(id, odata) => {
+            
+                    const respose = await oClass.update('productos', odata, id);
+            
+                    res.json(respose)
+            
+                };
+            
+                fileUpdate( req.params.id,
+                    {    
+                        nombre: req.body.nombre,
+                        descripcion: req.body.descripcion,
+                        codigo: req.body.codigo,
+                        foto: req.body.foto,
+                        precio: req.body.precio,
+                        stock: req.body.stock
+            
+                    })    
+            
+            });
 
-    const fileSave = async(odata) => {
+        return routerProduct;
 
-        const respose = await file.download('productos', odata);
-
-        res.json(respose)
-
-    };
-
-    fileSave({nombre: req.body.nombre,
-        descripcion: req.body.descripcion,
-        codigo: req.body.codigo,
-        foto: req.body.foto,
-        precio: req.body.precio,
-        stock: req.body.stock})
-
-});
-
-routerProduct.put('/actualizar/:id', (req, res) => {
-
-    const fileUpdate = async(id, odata) => {
-
-        const respose = await file.update('productos', odata, id);
-
-        res.json(respose)
-
-    };
-
-    fileUpdate( req.params.id,
-        {    
-            nombre: req.body.nombre,
-            descripcion: req.body.descripcion,
-            codigo: req.body.codigo,
-            foto: req.body.foto,
-            precio: req.body.precio,
-            stock: req.body.stock
-
-        })    
-
-});
-
-routerProduct.delete('/borrar/:id', (req, res) => {
-
-    const fileDelete = async(id) => {
-
-        const respose = await file.delete('productos', id);
-
-        res.json(respose)
-
-    };
-
-    fileDelete( req.params.id )        
-
-});
-
-module.exports = routerProduct;
+};
