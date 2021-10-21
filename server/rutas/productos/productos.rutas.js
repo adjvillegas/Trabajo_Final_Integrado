@@ -7,6 +7,10 @@ module.exports = ( oClass ) => {
     routerProduct.use(express.json());
     routerProduct.use(express.urlencoded({extended: true}))
 
+    routerProduct.get('/mode', (req,res) => {
+        res.send(oClass)
+    })
+
     routerProduct.get('/listar/:id?', (req, res) => {
 
             const fileRead = async(id) => {

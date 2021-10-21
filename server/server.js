@@ -3,7 +3,7 @@ const app = express();
 
 const PORT = 8080;
 
-const persistencia = '0'
+let persistencia = '0'
 
 // const api = require('./rutas/api.rutas.js');
 
@@ -12,6 +12,9 @@ const cors = require('cors')
 
 app.use(bodyParser.json());
 app.use(cors());
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 
 const Archivo = require('./controller/fileSystem');
 
@@ -31,10 +34,14 @@ const setPersistencia = (myValue) => {
 
     switch (myValue) {
         case '0':
-            return new Archivo()
+            // return new Archivo()
+            app.use('/productos', 'Archivo');
+            return 'Archivo';
             break;
         case '1':
-            return new MySQLMariaDBLocal()
+            // return new MySQLMariaDBLocal()
+            app.use('/productos', 'MySQLMariaDBLocal');
+            return 'MySQLMariaDBLocal'
             break;
         case '2':
             return new MySQLMariaDBDBaaS()
@@ -57,6 +64,19 @@ const setPersistencia = (myValue) => {
     }
 
 }
+
+app.get('/', (req, res ) => {
+    res.json({"value": 0})
+})
+
+app.post('/', (req, res ) => {
+    console.log(req.body.value)
+    const { value } = req.body;
+
+    persistencia = value
+
+    res.send(value)
+})
 
 // 
 
@@ -85,7 +105,7 @@ const setPersistencia = (myValue) => {
 
 
 app.use('/carrito', routeCarrito);
-app.use('/productos', routeProducto(setPersistencia(persistencia)));
+// app.use('/productos', routeProducto(setPersistencia(persistencia)));
 
 const server = app.listen(PORT, () => {
     console.log('server iniciado')

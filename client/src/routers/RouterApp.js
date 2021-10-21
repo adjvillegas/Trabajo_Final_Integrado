@@ -13,11 +13,11 @@ import ProductMaintenance from '../components/ProductMaintenance.js';
 
 
 //Provider
-// import { CartProvider } from '../providers/CartContext.js';
+import { CartProvider } from '../providers/CartContext.js';
 
 const RouterApp = () => {
     return (
-        // <CartProvider>
+        <CartProvider>
             <Router>
                 <div>
                     <MenuNav/>
@@ -31,7 +31,7 @@ const RouterApp = () => {
                     </Switch>
                 </div>
             </Router>
-        // </CartProvider>
+         </CartProvider>
     )
 }
 

@@ -1,31 +1,31 @@
-const express = require('express');
-const api = express();
+// const express = require('express');
+// const api = express();
 
-//Rutas
-const routeCarrito = require('./carrito/carrito.rutas');
-const routeProducto = require('./productos/productos.rutas');
+// //Rutas
+// const routeCarrito = require('./carrito/carrito.rutas');
+// const routeProducto = require('./productos/productos.rutas');
 
-const Archivo = require('../controller/archivoClass');
+// const Archivo = require('../controller/archivoClass');
 
-let persistencia = new Archivo();
+// // let persistencia = new Archivo();
 
-api.get('/', (req, res) => {
-    console.log('stoy')
-    const algo = '0'
+// // api.get('/', (req, res) => {
+// //     console.log('stoy')
+// //     const algo = '0'
 
-    switch (algo) {
-        case '0':
+// //     switch (algo) {
+// //         case '0':
 
-            persistencia = new Archivo()
+// //             persistencia = new Archivo()
 
-            break;
+// //             break;
     
-        default:
-            break;
-    }
-})
+// //         default:
+// //             break;
+// //     }
+// // })
 
-api.use('/carrito', routeCarrito);
-api.use('/productos', routeProducto(persistencia));
+// api.use('/carrito', routeCarrito);
+// api.use('/productos', routeProducto(persistencia));
 
-module.exports = api;
+// module.exports = api;

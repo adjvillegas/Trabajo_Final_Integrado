@@ -13,10 +13,9 @@ const ProductList = () => {
     useEffect(() => {
 
         async function myRequest() {
-            
+              
                 const response = await axios(`http://localhost:8080/productos/listar/`)
         
-
             setProducts(response.data)
 
         }
